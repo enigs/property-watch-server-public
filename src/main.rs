@@ -11,7 +11,7 @@ use tonic_health::pb::{
     HealthCheckRequest, health_check_response::ServingStatus, health_client::HealthClient,
 };
 
-#[tokio::main]
+#[tokio::main(worker_threads = 2)]
 async fn main() -> Result<(), Box<dyn Error>> {
     let args: Vec<String> = env::args().collect();
     match args.get(1).map(String::as_str).unwrap_or("serve") {
