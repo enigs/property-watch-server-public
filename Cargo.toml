@@ -1,0 +1,28 @@
+[package]
+name = "property-watch-server"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.93"
+
+[[bin]]
+name = "pw-server"
+path = "src/main.rs"
+
+[dependencies]
+prost = "=0.14.3"
+sqlx = { version = "=0.8.6", default-features = false, features = ["runtime-tokio", "sqlite"] }
+tokio = { version = "=1.54.1", features = ["macros", "rt-multi-thread", "net", "signal", "time"] }
+tokio-stream = { version = "=0.1.18", features = ["net"] }
+tonic = "=0.14.6"
+tonic-health = "=0.14.6"
+tonic-prost = "=0.14.6"
+
+[build-dependencies]
+tonic-prost-build = "=0.14.6"
+
+[dev-dependencies]
+tempfile = "=3.27.0"
+
+[profile.release]
+strip = true
+lto = "thin"
